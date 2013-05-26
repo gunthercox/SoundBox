@@ -54,7 +54,7 @@ public class toneGenerator implements Runnable{
 		
 		(new Thread(new toneGenerator(notes3))).start();
 		
-		// SINGLE TONE EXAMPEL   
+		// SINGLE TONE EXAMPEL (NOT BEING USED)
 
 		//Open up audio output, using 44100hz sampling rate, 16 bit samples, mono, and big endian byte ordering
 		/*AudioFormat format = new AudioFormat(RATE, 16, 1, true, true);
