@@ -1,6 +1,15 @@
 import javax.sound.midi.*;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.nio.ByteBuffer;
+import java.util.Scanner;
+
 import javax.sound.sampled.*;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 
 /**
  * 
@@ -17,10 +26,16 @@ public class toneGenerator implements Runnable{
 	public static int[] notes3 = new int[]{127,64,127,64,127,64,127,64,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,127,127,64,127,64,127,64,127,64,127,64};
 	
 	private static int[] noteArray;
+	private static int singleNote;
 	
-	// CONSTRUCTOR: THESE ARGUMENTS WILL BE PASSED TO THE THREAD
+	// CONSTRUCTORS: THESE ARGUMENTS WILL BE PASSED TO THE THREAD
+	
 	public toneGenerator(int[] noteArray) {
 		this.noteArray = noteArray;
+	}
+	
+	public toneGenerator(int singleNote) {
+		this.singleNote = singleNote;
 	}
 
 	public static void main(String[] args) throws InterruptedException, LineUnavailableException {
@@ -46,6 +61,24 @@ public class toneGenerator implements Runnable{
 			notes[i] = i;
 		}
 		
+		// PROMPT TO PLAY MUSIC OR GO TO KEYBOARD MODE
+		Scanner input = new Scanner(System.in);
+		System.out.println("Press 1 to play music or 2 to go to keybord mode");
+		
+		if (/*input.nextInt() == 2*/ true) {
+			System.out.println("keyboard mode activated.");
+			playNote(70);
+			
+			PianoGui gui = new PianoGui();
+			gui.setTitle("Essay Generator");
+			gui.setSize(800, 600);
+			gui.setLocationRelativeTo(null);
+			gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			gui.setVisible(true);
+			
+		} else {
+			System.out.println("Music mode activated.");
+		
 		(new Thread(new toneGenerator(notes1))).start();
 		
 		//Thread.sleep(4000);
@@ -53,6 +86,8 @@ public class toneGenerator implements Runnable{
 		
 		
 		(new Thread(new toneGenerator(notes3))).start();
+		
+		}
 		
 		// SINGLE TONE EXAMPEL (NOT BEING USED)
 
@@ -132,8 +167,25 @@ public class toneGenerator implements Runnable{
 			}
 		} catch (MidiUnavailableException e) {
 			e.printStackTrace();
-		}
-		
+		}	
+	}
+	
+	public static void playNote(int note) {
+		try {
+			Synthesizer synthesizer = MidiSystem.getSynthesizer();
+			synthesizer.open();
+			MidiChannel channel = synthesizer.getChannels()[0];
+
+				channel.noteOn(note, 200);
+				try {
+					Thread.sleep(600);
+				} catch (InterruptedException e) {
+				} finally {
+					channel.noteOff(note);
+				}
+		} catch (MidiUnavailableException e) {
+			e.printStackTrace();
+		}	
 	}
 
 }
