@@ -3,9 +3,19 @@ SoundBox
 
 Music in Java
 
-## This takes the integer value of any key on your keyboard and converts it into a midi tone
+# About
+This takes the integer value of any key on your keyboard and converts it into a midi tone.
 
-#Future:
+# Running
 
-## Needs support for multiple simultaneous key presses 
-## Currently a GUI is used to type into, I would like to make it run so it doesn't require an interface
+To run the program compile you must first compile it. To do this run:
+
+```
+javac toneGenerator.java
+```
+
+Run the compiled files using
+
+```
+java toneGenerator
+```
