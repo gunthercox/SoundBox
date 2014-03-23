@@ -15,14 +15,14 @@ public class PianoGui extends JFrame implements KeyListener {
 		setLayout(new BorderLayout());
 
 		JEditorPane text = new JTextPane();
-
 		add(text);
 		text.addKeyListener(this);
-
 		text.requestFocusInWindow();
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Piano");
+		setSize(800, 600);
+		setLocationRelativeTo(null);
 	}
 
 	// KEYBOARD EVENTS

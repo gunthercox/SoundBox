@@ -4,14 +4,12 @@ import javax.sound.midi.MidiChannel;
 
 import javax.sound.midi.MidiUnavailableException;
 
-import javax.sound.sampled.*;
-
 import java.util.Scanner;
 
 /**
  * 
  * @author Gunther Cox
- * @version 0.0.1
+ * @version 0.2.0
  * @title Album01 Track01
  *
  */
@@ -31,14 +29,9 @@ public class toneGenerator implements Runnable {
 		this.singleNote = singleNote;
 	}
 
-	public static void main(String[] args) throws InterruptedException, LineUnavailableException {
-			
-			PianoGui gui = new PianoGui();
-			gui.setTitle("Essay Generator");
-			gui.setSize(800, 600);
-			gui.setLocationRelativeTo(null);
-			gui.setVisible(true);
-
+	public static void main(String[] args) {
+		PianoGui gui = new PianoGui();
+		gui.setVisible(true);
 	}
 	
 	public static void keyboardNote(int note) {
@@ -76,7 +69,7 @@ public class toneGenerator implements Runnable {
 
 				channel.noteOn(note, 200);
 				try {
-					Thread.sleep(600);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 				} finally {
 					channel.noteOff(note);
