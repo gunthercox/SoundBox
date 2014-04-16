@@ -14,18 +14,18 @@ import java.util.Scanner;
  *
  */
 
-public class toneGenerator implements Runnable {
+public class SoundBox implements Runnable {
 
 	private static int[] noteArray;
 	private static int singleNote;
 	
 	// CONSTRUCTORS: THESE ARGUMENTS WILL BE PASSED TO THE THREAD
 	
-	public toneGenerator(int[] noteArray) {
+	public SoundBox(int[] noteArray) {
 		this.noteArray = noteArray;
 	}
 	
-	public toneGenerator(int singleNote) {
+	public SoundBox(int singleNote) {
 		this.singleNote = singleNote;
 	}
 
@@ -35,7 +35,7 @@ public class toneGenerator implements Runnable {
 	}
 	
 	public static void keyboardNote(int note) {
-		(new Thread(new toneGenerator(note))).start();
+		(new Thread(new SoundBox(note))).start();
 	}
 	
 	// THREADED METHOD TO PLAY MIDI TONES

@@ -30,7 +30,7 @@ public class PianoGui extends JFrame implements KeyListener {
 	public void keyReleased(KeyEvent e) {}
 	public void keyPressed(KeyEvent e) {
 	    int key = e.getKeyCode();
-	    toneGenerator.playNote(key);
+	    SoundBox.playNote(key);
 	}
 
 }
